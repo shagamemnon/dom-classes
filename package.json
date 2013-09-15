@@ -1,0 +1,26 @@
+{
+  "name": "dom-classes",
+  "version": "0.0.0",
+  "description": "Cross-browser element class manipulation",
+  "main": "index.js",
+  "scripts": {
+    "test": "fox"
+  },
+  "dependencies": {
+    "indexof": "*"
+  },
+  "devDependencies": {
+    "fox": "*"
+  },
+  "keywords": [
+    "dom",
+    "css",
+    "class"
+  ],
+  "repository": {
+    "url": "git@github.com:azer\/dom-classes.git",
+    "type": "git"
+  },
+  "author": "Azer Ko\u00e7ulu <azer@kodfabrik.com>",
+  "license": "BSD"
+}
