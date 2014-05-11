@@ -1,26 +1,20 @@
 {
   "name": "dom-classes",
   "version": "0.0.0",
-  "description": "Cross-browser element class manipulation",
+  "description": "Add, change, remove DOM classes",
   "main": "index.js",
-  "scripts": {
-    "test": "fox"
-  },
   "dependencies": {
     "indexof": "*"
-  },
-  "devDependencies": {
-    "fox": "*"
   },
   "keywords": [
     "dom",
     "css",
-    "class"
+    "class",
+    "browser"
   ],
   "repository": {
-    "url": "git@github.com:azer\/dom-classes.git",
+    "url": "git@github.com:npm-dom\/dom-classes.git",
     "type": "git"
   },
-  "author": "Azer Ko\u00e7ulu <azer@kodfabrik.com>",
   "license": "BSD"
 }
