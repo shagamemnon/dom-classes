@@ -1,6 +1,6 @@
 {
   "name": "dom-classes",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Add, change, remove DOM classes",
   "main": "index.js",
   "scripts": {
