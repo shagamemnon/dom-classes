@@ -1,112 +1,139 @@
+var test = require('tape')
 var classes = require('./');
 
-var el;
-beforeEach(function(){
-  el = document.createElement('div');
+function getElement() {
+  var el = document.createElement('div');
   el.classList = undefined;
-});
+  return el
+}
 
-describe('add(element, class)', function(){
-  it('should add a class', function(){
+test('add(element, class)', function(t){
+  t.test('should add a class', function(t){
+    var el = getElement()
     classes.add(el, 'foo');
-    expect('foo').to.be.equal(el.className);
+    t.equal('foo', el.className);
+    t.end()
   });
 
-  it('should not add the same class twice', function(){
+  t.test('should not add the same class twice', function(t){
+    var el = getElement()
     classes.add(el, 'foo');
     classes.add(el, 'foo');
     classes.add(el, 'foo');
     classes.add(el, 'bar');
-    expect('foo bar').to.be.equal(el.className);
+    t.equal('foo bar', el.className);
+    t.end()
   });
 
 });
 
-describe('remove(el, class)', function(){
+test('remove(el, class)', function(t){
 
-  it('should remove a class from the beginning', function(){
+  t.test('should remove a class from the beginning', function(t){
+    var el = getElement()
     el.className = 'foo bar baz';
     classes.remove(el, 'foo');
-    expect('bar baz').to.be.equal(el.className);
+    t.equal('bar baz', el.className);
+    t.end()
   });
 
-  it('should remove a class from the middle', function(){
+  t.test('should remove a class from the middle', function(t){
+    var el = getElement()
     el.className = 'foo bar baz';
     classes.remove(el, 'bar');
-    expect('foo baz').to.be.equal(el.className);
+    t.equal('foo baz', el.className);
+    t.end()
   });
 
-  it('should remove a class from the end', function(){
+  t.test('should remove a class from the end', function(t){
+    var el = getElement()
     el.className = 'foo bar baz';
     classes.remove(el, 'baz');
-    expect('foo bar').to.be.equal(el.className);
+    t.equal('foo bar', el.className);
+    t.end()
   });
 });
 
-describe('remove(el, regexp)', function(){
-  it('should remove matching classes', function(){
+test('remove(el, regexp)', function(t){
+  t.test('should remove matching classes', function(t){
+    var el = getElement()
     el.className = 'foo item-1 item-2 bar';
     classes.remove(el, /^item-/);
-    expect('foo bar').to.be.equal(el.className);
+    t.equal('foo bar', el.className);
+    t.end()
   });
 });
 
-describe('toggle(el, class)', function(){
-  describe('when present', function(){
-    it('should remove the class', function(){
+test('toggle(el, class)', function(t){
+  t.test('when present', function(t){
+    t.test('should remove the class', function(t){
+      var el = getElement()
       el.className = 'foo bar hidden';
       classes.toggle(el, 'hidden');
-      expect('foo bar').to.be.equal(el.className);
+      t.equal('foo bar', el.className);
+      t.end()
     });
   });
 
-  describe('when not present', function(){
-    it('should add the class', function(){
+  t.test('when not present', function(t){
+    t.test('should add the class', function(t){
+      var el = getElement()
       el.className = 'foo bar';
       classes.toggle(el, 'hidden');
-      expect('foo bar hidden').to.be.equal(el.className);
+      t.equal('foo bar hidden', el.className);
+      t.end()
     });
   });
 });
 
-describe('has(el, class)', function(){
-  it('should check if the class is present', function(){
+test('has(el, class)', function(t){
+  t.test('should check if the class is present', function(t){
+    var el = getElement()
     el.className = 'hey there';
-    expect(classes.has(el, 'foo')).to.be.false;
-    expect(classes.has(el, 'hey')).to.be.true;
-    expect(classes.has(el, 'there')).to.be.true;
+    t.notOk(classes.has(el, 'foo'));
+    t.ok(classes.has(el, 'hey'));
+    t.ok(classes.has(el, 'there'));
+    t.end()
   });
 });
 
-describe('classes(el)', function(){
-  it('should return an array of classes', function(){
+test('classes(el)', function(t){
+  t.test('should return an array of classes', function(t){
+    var el = getElement()
     el.className = 'foo bar baz';
     var ret = classes(el);
-    expect('foo').to.be.equal(ret[0]);
-    expect('bar').to.be.equal(ret[1]);
-    expect('baz').to.be.equal(ret[2]);
+    t.equal('foo', ret[0]);
+    t.equal('bar', ret[1]);
+    t.equal('baz', ret[2]);
+    t.end()
   });
 
-  it('should return an empty array when no className is defined', function(){
+  t.test('should return an empty array when no className is defined', function(t){
+    var el = getElement()
     var ret = classes(el);
-    expect(0).to.be.equal(ret.length);
+    t.equal(0, ret.length);
+    t.end()
   });
 
-  it('should ignore leading whitespace', function(){
+  t.test('should ignore leading whitespace', function(t){
+    var el = getElement()
     el.className = '  foo bar    baz';
     var ret = classes(el);
-    expect('foo').to.be.equal(ret[0]);
-    expect('bar').to.be.equal(ret[1]);
-    expect('baz').to.be.equal(ret[2]);
-    expect(3).to.be.equal(ret.length);
+    t.equal('foo', ret[0]);
+    t.equal('bar', ret[1]);
+    t.equal('baz', ret[2]);
+    t.equal(3, ret.length);
+    t.end()
   });
 
-  it('should ignore trailing whitespace', function(){
+  t.test('should ignore trailing whitespace', function(t){
+    var el = getElement()
     el.className = 'foo bar   baz     ';
     var ret = classes(el);
-    expect('foo').to.be.equal(ret[0]);
-    expect('bar').to.be.equal(ret[1]);
-    expect('baz').to.be.equal(ret[2]);
-    expect(3).to.be.equal(ret.length);
+    t.equal('foo', ret[0]);
+    t.equal('bar', ret[1]);
+    t.equal('baz', ret[2]);
+    t.equal(3, ret.length);
+    t.end()
   });
 });

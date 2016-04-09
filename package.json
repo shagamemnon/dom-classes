@@ -3,8 +3,11 @@
   "version": "0.0.1",
   "description": "Add, change, remove DOM classes",
   "main": "index.js",
+  "scripts": {
+    "test": "browserify test.js | tape-run"
+  },
   "dependencies": {
-    "indexof": "*"
+    "indexof": "0.0.1"
   },
   "keywords": [
     "dom",
@@ -16,5 +19,10 @@
     "url": "git@github.com:npm-dom/dom-classes.git",
     "type": "git"
   },
-  "license": "BSD"
+  "license": "BSD",
+  "devDependencies": {
+    "browserify": "13.0.0",
+    "tape": "4.5.1",
+    "tape-run": "2.1.3"
+  }
 }
